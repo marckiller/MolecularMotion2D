@@ -59,7 +59,6 @@ class InterfacePanel:
         self.manager.update(dt)
 
         pygame.draw.rect(screen, (60, 60, 60), (self.x, self.y, self.width, self.height))
-
         self.manager.draw_ui(screen)
 
     def update_output(self, text):
