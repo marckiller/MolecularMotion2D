@@ -22,3 +22,9 @@ Once the environment is set up, you need to activate it (MacOS, Linux):
 ```bash
 source venv/bin/activate
 ```
+
+### 3. Run simulation
+
+```bash
+python main.py
+```
