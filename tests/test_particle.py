@@ -1,5 +1,4 @@
 import unittest
-import math
 import pygame
 from src.particle import Particle 
 
@@ -37,6 +36,3 @@ class TestParticle(unittest.TestCase):
 
     def test_draw(self):
         pass
-
-if __name__ == '__main__':
-    unittest.main()
