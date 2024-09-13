@@ -4,6 +4,7 @@ import random
 from src.interface_panel import InterfacePanel
 from src.arena import Arena
 import math
+import time
 
 class AppWindow:
 
@@ -19,6 +20,9 @@ class AppWindow:
         self.default_particle_radius = 100 
         self.default_particle_speed = 100 
 
+        #intro
+        self.logo = pygame.image.load('assets/images/intro.png')
+
         #Interface panel
         self.manager = pygame_gui.UIManager((self.width, self.height))
         panel_width = self.width // 4
@@ -31,8 +35,30 @@ class AppWindow:
         self.interface.particle_count_input.set_text(str(self.default_particle_count))
         self.interface.particle_size_input.set_text(str(self.default_particle_radius))
 
+        #Customizing the interdace
+        icon = pygame.image.load('assets/images/icon.png')
+        pygame.display.set_icon(icon)
+        pygame.display.set_caption('Gas-tastic!')
+
         #Running the app
         self.reset_simulation()
+
+    def show_logo(self):
+        start_time = pygame.time.get_ticks()
+
+        while pygame.time.get_ticks() - start_time < 3000:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+
+            self.window.fill((30, 30, 30))
+            logo_rect = self.logo.get_rect(center=(self.width // 2, self.height // 2))
+            self.window.blit(self.logo, logo_rect)
+            pygame.display.flip()
+
+            self.clock.tick(60)
+
+        pygame.display.flip()
 
     def reset_simulation(self):
 
@@ -61,6 +87,9 @@ class AppWindow:
         self.interface.update_output("Histogram:\n button not implemented")
 
     def run(self):
+
+        self.show_logo()
+
         while self.running:
             dt = self.clock.tick(60) / 1000.0 #time between frames
 
