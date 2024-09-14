@@ -16,12 +16,20 @@ class Particle:
         self.y += self.vy * dt
 
     def bounce(self, width, height):
-        if self.x - self.radius < 0 or self.x + self.radius > width:
+        if self.x - self.radius < 0:
             self.vx = -self.vx
+            self.x = self.radius  #set particle on the edge of the wall after bounce
+        elif self.x + self.radius > width:
+            self.vx = -self.vx
+            self.x = width - self.radius
 
-        if self.y - self.radius < 0 or self.y + self.radius > height:
+        if self.y - self.radius < 0:
             self.vy = -self.vy
-
+            self.y = self.radius  #set particle on the edge of the wall after bounce
+        elif self.y + self.radius > height:
+            self.vy = -self.vy
+            self.y = height - self.radius
+            
     def collide(self, particle):
         dx = self.x - particle.x
         dy = self.y - particle.y
