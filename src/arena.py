@@ -9,22 +9,42 @@ class Arena:
         self.height = height
         self.particles = []
 
-    def add_particles(self, number, radius, velocity):
+    def add_particles(self, number, radius, velocity) -> str:
+        
+        max_number_of_tries = 1000
+        placed = False
+        not_placed = 0
 
         for _ in range(number):
-            while True:
+
+            placed = False
+
+            for _ in range(max_number_of_tries):
 
                 x = random.uniform(radius, self.width - radius)
                 y = random.uniform(radius, self.height - radius)
 
                 color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
-                new_particle = Particle(x, y, radius, velocity[0], velocity[1], color)
+                angle = random.uniform(0, 2 * math.pi)
+                vx = velocity * math.cos(angle)
+                vy = velocity * math.sin(angle)
+
+                new_particle = Particle(x, y, radius, vx, vy, color)
 
                 if not self.is_overlapping(new_particle):
-                    #TODO: maybe there is more elegant way to do this
                     self.particles.append(new_particle)
+                    placed = True
                     break
+
+            if not placed:
+                not_placed += 1
+        
+        if not_placed == 0:
+            return f"Successfully placed {number} particles."
+        
+        else:
+            return f"Failed to place {not_placed} from {number} particles. Decrease the size of praticles."
 
     def is_overlapping(self, new_particle):
 

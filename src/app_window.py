@@ -76,15 +76,9 @@ class AppWindow:
 
         self.arena.particles = []
 
-        for _ in range(particle_count):
-            angle = random.uniform(0, 2 * math.pi)
+        message = self.arena.add_particles(particle_count, particle_radius, self.default_particle_speed)
 
-            vx = self.default_particle_speed * math.cos(angle)
-            vy = self.default_particle_speed * math.sin(angle)
-
-            self.arena.add_particles(1, particle_radius, (vx, vy))
-
-        self.interface.add_terminal_message(f"Reset: {particle_count} particles, radius {particle_radius}")
+        self.interface.add_terminal_message(message)
 
     def display_kinetic_energy_histogram(self):
 
