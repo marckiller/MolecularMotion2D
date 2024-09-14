@@ -50,3 +50,6 @@ class Arena:
     def draw(self, screen):
         for particle in self.particles:
             particle.draw(screen)
+
+    def get_kinetic_energies(self):
+        return [particle.kinetic_energy() for particle in self.particles]

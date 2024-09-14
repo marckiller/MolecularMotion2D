@@ -1,5 +1,4 @@
 import math
-import random
 import pygame
 
 class Particle:
@@ -43,7 +42,7 @@ class Particle:
                 particle.vy += vn * ny
 
     def kinetic_energy(self):
-        return 0.5 * (self.vx ** 2 + self.vy ** 2)
+        return self.vx ** 2 + self.vy ** 2
 
     def is_overlapping(self, particle):
         distance = math.hypot(self.x - particle.x, self.y - particle.y)

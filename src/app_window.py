@@ -2,10 +2,11 @@ import pygame
 import pygame_gui
 import random
 import math
-import time
+import multiprocessing
 
 from src.interface_panel import InterfacePanel
 from src.arena import Arena
+from src.histogram_manager import HistogramManager
 
 class AppWindow:
 
@@ -40,6 +41,8 @@ class AppWindow:
         icon = pygame.image.load('assets/images/icon.png')
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Gas-tastic!')
+
+        self.histogram_manager = HistogramManager('Energy Histogram', 'Kinetic Energy', 'Frequency', 15)
 
         #Running the app
         self.reset_simulation()
@@ -84,7 +87,11 @@ class AppWindow:
         self.interface.add_terminal_message(f"Reset: {particle_count} particles, radius {particle_radius}")
 
     def display_kinetic_energy_histogram(self):
-        self.interface.add_terminal_message("Histogram: button not implemented")
+
+        energies = self.arena.get_kinetic_energies()
+        histogram_process = multiprocessing.Process(target=self.histogram_manager.show_histogram, args=(energies,))
+        histogram_process.start()
+        self.interface.add_terminal_message("Displaying kinetic energy histogram.")
 
     def run(self):
 
