@@ -1,10 +1,11 @@
 import pygame
 import pygame_gui
 import random
-from src.interface_panel import InterfacePanel
-from src.arena import Arena
 import math
 import time
+
+from src.interface_panel import InterfacePanel
+from src.arena import Arena
 
 class AppWindow:
 
@@ -67,7 +68,7 @@ class AppWindow:
             particle_radius = int(self.interface.particle_size_input.get_text())
 
         except ValueError:
-            self.interface.update_output("Invalid input. Please enter valid numbers.")
+            self.interface.add_terminal_message("Invalid input. Please enter valid numbers.")
             return
 
         self.arena.particles = []
@@ -80,11 +81,10 @@ class AppWindow:
 
             self.arena.add_particles(1, particle_radius, (vx, vy))
 
-        self.interface.update_output(f"Reset: {particle_count} particles, radius {particle_radius}")
+        self.interface.add_terminal_message(f"Reset: {particle_count} particles, radius {particle_radius}")
 
     def display_kinetic_energy_histogram(self):
-        print("Histogram: button not implemented")
-        self.interface.update_output("Histogram:\n button not implemented")
+        self.interface.add_terminal_message("Histogram: button not implemented")
 
     def run(self):
 
