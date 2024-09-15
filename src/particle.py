@@ -44,6 +44,9 @@ class Particle:
         distance = math.hypot(dx, dy)
 
         if distance < self.radius + particle.radius:
+
+            if distance < 1e-8: # Prevent division by zero
+                distance = 1e-8
             # Normalized collision vector
             nx = dx / distance
             ny = dy / distance
