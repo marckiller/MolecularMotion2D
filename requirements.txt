@@ -1,4 +1,4 @@
 pygame == 2.6.0
-pygame_gui ==  0.6.10
+pygame_gui ==  0.6.9
 matplotlib == 3.9.0
 numpy == 2.1.0

@@ -16,7 +16,7 @@ class InterfacePanel:
 
         # Create particle count and size input fields using TextInput class
         self.particle_count_input = TextInput(x + 10, y, width - 20, 30, 'Number of particles:', manager)
-        self.particle_size_input = TextInput(x + 10, y + 70, width - 20, 30, 'Particle size (radius):', manager)
+        self.particle_size_input = TextInput(x + 10, y + 70, width - 20, 30, 'Particle radius:', manager)
 
         # Create buttons using Button class
         self._reset_button = Button(x + 10, y + 140, width - 20, 60, 'Reset settings', manager)
