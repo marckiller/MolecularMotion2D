@@ -41,7 +41,7 @@ class Particle:
         """Handle elastic collision between this particle and another particle."""
         dx = self.x - particle.x
         dy = self.y - particle.y
-        distance = self._distance_to(particle)
+        distance = math.hypot(dx, dy)
 
         if distance < self.radius + particle.radius:
             # Normalized collision vector
